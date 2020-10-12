@@ -3,11 +3,16 @@ package com.example.demo.model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.stream.Stream;
+
+/**
+ * Question type that can be used
+ */
 public enum Qtype{
 
     MCQ("MCQ"),
     TEXT("TEXT"),
     DATE("DATE");
+
 
     private String type;
     private Qtype(String type)
