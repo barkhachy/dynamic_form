@@ -23,6 +23,11 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * To create a user
+     * @param user
+     * @return
+     */
     @Override
     public User create(User user)
     {
@@ -33,6 +38,11 @@ public class UserServiceImpl implements UserService{
         return userRepository.save(user);
     }
 
+    /**
+     * To find user based on user id
+     * @param id
+     * @return User object
+     */
     @Override
     public User findByid(String id)
     {
@@ -47,6 +57,10 @@ public class UserServiceImpl implements UserService{
         return user;
     }
 
+    /**
+     * To get list of all users
+     * @return List<User>
+     */
     @Override
     public List<User> findAll()
     {
@@ -62,6 +76,11 @@ public class UserServiceImpl implements UserService{
         return ans;
     }
 
+    /**
+     * To update details of a user
+     * @param user
+     * @return
+     */
     @Override
     public User update(User user)
     {
@@ -72,6 +91,10 @@ public class UserServiceImpl implements UserService{
         return userRepository.save(user);
     }
 
+    /**
+     * To delete a user
+     * @param id
+     */
     @Override
     public void delete(String id)
     {

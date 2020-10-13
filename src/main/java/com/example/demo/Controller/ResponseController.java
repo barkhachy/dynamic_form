@@ -22,6 +22,11 @@ public class ResponseController {
     @Autowired
     private FormService formService;
 
+    /**
+     * To get list of responses made on particular form
+     * @param form_id
+     * @return
+     */
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value="form/{form_id}/responses", method = RequestMethod.GET)
     public List<Response> all_resp(@PathVariable(value="form_id") String form_id)
@@ -31,6 +36,12 @@ public class ResponseController {
     }
 
 
+    /**
+     * To create response on a form
+     * @param response
+     * @param form_id
+     * @return
+     */
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value="form/{form_id}", method = RequestMethod.POST)
     public String get_form(@RequestBody Response response, @PathVariable(value="form_id") String form_id)

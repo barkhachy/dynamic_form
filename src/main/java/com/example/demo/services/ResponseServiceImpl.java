@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Response Service
+ */
 @Service
 public class ResponseServiceImpl implements ResponseService {
 
@@ -20,6 +23,11 @@ public class ResponseServiceImpl implements ResponseService {
     @Autowired
     ResponseRepository responseRepository;
 
+    /**
+     * To create a response on form
+     * @param response
+     * @return response object
+     */
     @Override
     public Response create(Response response)
     {
@@ -30,6 +38,11 @@ public class ResponseServiceImpl implements ResponseService {
         return responseRepository.save(response);
     }
 
+    /**
+     * To update a response
+     * @param response
+     * @return
+     */
     @Override
     public Response update(Response response)
     {
@@ -40,6 +53,11 @@ public class ResponseServiceImpl implements ResponseService {
         return responseRepository.save(response);
     }
 
+    /**
+     * To get all response available on particular form
+     * @param formid
+     * @return List<Response>
+     */
     @Override
     public List<Response> all(String formid)
     {

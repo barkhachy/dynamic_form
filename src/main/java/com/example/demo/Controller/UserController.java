@@ -18,6 +18,10 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    /**
+     * To find all users
+     * @return list of users
+     */
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/findAll", method = RequestMethod.GET)
     public List<User> findAll()
@@ -31,6 +35,11 @@ public class UserController {
         return users;
     }
 
+    /**
+     * To get details of a particular user based on id
+     * @param id
+     * @return User
+     */
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value ="/user/{id}", method = RequestMethod.GET)
     public User get_user(@PathVariable(value="id") String id)
@@ -38,6 +47,12 @@ public class UserController {
         return userService.findByid(id);
     }
 
+    /**
+     * To update details of a user
+     * @param id
+     * @param user
+     * @return
+     */
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value="/user/{id}", method = RequestMethod.PUT)
     public User update_user(@PathVariable(value="id") String id, @RequestBody User user)
@@ -54,6 +69,11 @@ public class UserController {
         return ans;
     }
 
+    /**
+     * To create a user
+     * @param user
+     * @return
+     */
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value="/user" , method = RequestMethod.POST)
     public User add_user(@RequestBody User user)

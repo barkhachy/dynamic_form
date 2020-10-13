@@ -14,6 +14,10 @@ public class FormController {
     @Autowired
     private FormService formService;
 
+    /**
+     * To get question's type
+     * @return array of QType
+     */
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value="create_form", method = RequestMethod.GET)
     public Qtype[] gettype()
@@ -21,6 +25,11 @@ public class FormController {
         return Qtype.values();
     }
 
+    /**
+     * To create a form
+     * @param form
+     * @return
+     */
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value="form", method = RequestMethod.POST)
     public String create(@RequestBody Form form)
@@ -29,6 +38,11 @@ public class FormController {
         return "created";
     }
 
+    /**
+     * Get a form based on provided id
+     * @param form_id
+     * @return
+     */
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value="form/{form_id}", method = RequestMethod.GET)
     public Form get_form(@PathVariable(value="form_id") String form_id)
@@ -37,6 +51,12 @@ public class FormController {
         return f;
     }
 
+    /**
+     * Update a form
+     * @param form
+     * @param form_id
+     * @return
+     */
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value="form/{form_id}", method = RequestMethod.PUT)
     public String update_form(@RequestBody Form form ,@PathVariable(value="form_id") String form_id)
@@ -50,6 +70,11 @@ public class FormController {
         return "You can't update this form";
     }
 
+    /**
+     * Delete a form
+     * @param form_id
+     * @return
+     */
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "form/{form_id}", method = RequestMethod.DELETE)
     public String delete_form(@PathVariable(value="form_id") String form_id)
