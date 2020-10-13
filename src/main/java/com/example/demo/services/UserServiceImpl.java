@@ -1,5 +1,7 @@
 package com.example.demo.services;
 
+import com.example.demo.exceptions.NoDataFoundException;
+import com.example.demo.exceptions.UserNotFoundException;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 import org.slf4j.Logger;
@@ -38,7 +40,11 @@ public class UserServiceImpl implements UserService{
         {
             LOGGER.info("Finding a user with given id");
         }
-        return userRepository.findByid(id);
+        User user = userRepository.findByid(id);
+        if(user==null) {
+            throw new UserNotFoundException(id);
+        }
+        return user;
     }
 
     @Override
@@ -48,7 +54,12 @@ public class UserServiceImpl implements UserService{
         {
             LOGGER.info("Finding all users");
         }
-        return userRepository.findAll();
+        List<User> ans = userRepository.findAll();
+        if(ans.isEmpty())
+        {
+            throw new NoDataFoundException();
+        }
+        return ans;
     }
 
     @Override
@@ -68,7 +79,7 @@ public class UserServiceImpl implements UserService{
         {
             LOGGER.info("Deleting the user");
         }
-        userRepository.deleteById(id);
+        userRepository.deleteById(id);//.orElseThrow(()-> new UserNotFoundException(id));
     }
 
 

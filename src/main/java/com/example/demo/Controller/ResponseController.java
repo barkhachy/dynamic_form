@@ -29,6 +29,8 @@ public class ResponseController {
         ArrayList<Response> ans = new ArrayList<>(responseService.all(form_id));
         return ans;
     }
+
+
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value="form/{form_id}", method = RequestMethod.POST)
     public String get_form(@RequestBody Response response, @PathVariable(value="form_id") String form_id)
