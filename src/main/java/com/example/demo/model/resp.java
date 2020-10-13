@@ -24,6 +24,22 @@ public class resp {
         this.ans = ans;
     }
 
+    public String getAns() {
+        return ans;
+    }
+
+    public void setAns(String ans) {
+        this.ans = ans;
+    }
+
+    public Qtype getType() {
+        return type;
+    }
+
+    public void setType(Qtype type) {
+        this.type = type;
+    }
+
     /**
      * Gives details of particular answer
      * @return String representation of answer

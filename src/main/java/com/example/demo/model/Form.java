@@ -13,9 +13,7 @@ import java.util.Objects;
 public class Form {
 
     @Id
-    private String form_id;
-
-    private String u_id;
+    private String formid;
 
     //ArrayList of question object
     ArrayList <Questions> qstn_list = new ArrayList<>();
@@ -23,7 +21,7 @@ public class Form {
     public Form(){
 
     }
-
+    private String uid;
     /**
      * Creates a form with specified values
      * @param id
@@ -31,7 +29,7 @@ public class Form {
      */
     public Form(String id,ArrayList<Questions> qstns)
     {
-        this.u_id=id;
+        this.uid=id;
         this.qstn_list = qstns;
     }
 
@@ -39,8 +37,8 @@ public class Form {
      * Gets the form_id of particular form
      * @return String representing the form_id
      */
-    public String getForm_id() {
-        return form_id;
+    public String getFormid() {
+        return formid;
     }
 
     /**
@@ -48,24 +46,24 @@ public class Form {
      * @param form_id
      */
 
-    public void setForm_id(String form_id) {
-        this.form_id = form_id;
+    public void setFormid(String form_id) {
+        this.formid = form_id;
     }
 
     /**
      * Gets the user id of owner of form
      * @return String representing the form's user id
      */
-    public String getU_id() {
-        return u_id;
+    public String getUid() {
+        return uid;
     }
 
     /**
      * Sets the user id of form's owner
      * @param u_id
      */
-    public void setU_id(String u_id) {
-        this.u_id = u_id;
+    public void setUid(String u_id) {
+        this.uid = u_id;
     }
 
     /**
@@ -91,8 +89,8 @@ public class Form {
     @Override
     public String toString() {
         return "Form{" +
-                "form_id='" + form_id + '\'' +
-                "user_id=" + u_id + '\''+
+                "form_id='" + formid + '\'' +
+                "user_id=" + uid + '\''+
                 ", qstn_list=" + qstn_list +
                 '}';
     }

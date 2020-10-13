@@ -16,9 +16,8 @@ import java.util.ArrayList;
 public class Response {
 
 
-    @Indexed
-    private String form_id;
-    private String user_id;
+    private String formid;
+    private String userid;
 
     // List of answers of all questions for provided form_id
     private ArrayList<resp> arr;
@@ -31,8 +30,8 @@ public class Response {
      */
     public Response(String f_id,String u_id, ArrayList<resp> arr)
     {
-        this.form_id=f_id;
-        this.user_id=u_id;
+        this.formid=f_id;
+        this.userid=u_id;
         this.arr=new ArrayList<>(arr);
     }
 
@@ -41,7 +40,7 @@ public class Response {
      * @return String representing the user_id
      */
     public String getUser_id() {
-        return user_id;
+        return userid;
     }
 
     /**
@@ -49,7 +48,7 @@ public class Response {
      * @param user_id
      */
     public void setUser_id(String user_id) {
-        this.user_id = user_id;
+        this.userid = user_id;
     }
 
     /**
@@ -57,7 +56,7 @@ public class Response {
      * @return String representing the form_id
      */
     public String getForm_id() {
-        return form_id;
+        return formid;
     }
 
     /**
@@ -65,7 +64,7 @@ public class Response {
      * @param form_id
      */
     public void setForm_id(String form_id) {
-        this.form_id = form_id;
+        this.formid = form_id;
     }
 
     /**
@@ -91,8 +90,8 @@ public class Response {
     @Override
     public String toString() {
         return "Response{" +
-                ", form_id='" + form_id + '\'' +
-                ", user_id='" + user_id + '\'' +
+                ", form_id='" + formid + '\'' +
+                ", user_id='" + userid + '\'' +
                 ", arr=" + arr +
                 '}';
     }

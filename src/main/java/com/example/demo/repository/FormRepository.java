@@ -9,17 +9,17 @@ public interface FormRepository extends MongoRepository<Form, String> {
 
     /**
      * A abstract method to get form on providing the form_id
-     * @param id
+     * @param formid
      * @return Form object
      */
-    public Form findByform_id(String id);
+   public Form findByformid(String formid);
 
     /**
      * A abstract method to get form based on creator_id
-     * @param id
+     * @param uid
      * @return A Form object
      */
-    public Form findByu_id(String id);
+    public Form findByuid(String uid);
 
 
 }

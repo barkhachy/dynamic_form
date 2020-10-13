@@ -12,13 +12,14 @@ public interface ResponseRepository extends MongoRepository<Response, String> {
      * @param form_id
      * @return List of response object
      */
-    public List<Response> findByform_id(String form_id);
+
+     public List<Response> findByformid(String form_id);
 
     /**
      * A abstract method to get list of all responses from particular user_id
      * @param user_id
      * @return List of response object
      */
-    public List<Response> findByuser_id(String user_id);
+     public List<Response> findByuserid(String user_id);
 
 }
