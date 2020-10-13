@@ -1,12 +1,13 @@
 package com.example.demo.services;
 
+import com.example.demo.exceptions.FormNotFoundException;
+import com.example.demo.exceptions.NoDataFoundException;
 import com.example.demo.model.Form;
 import com.example.demo.repository.FormRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -34,7 +35,12 @@ public class FormServiceImpl implements FormService {
         {
             logger.info("Finding form for given form_id");
         }
-        return formRepository.findByformid(formid);
+        Form form = formRepository.findByformid(formid);
+        if(form==null)
+        {
+            throw new FormNotFoundException(formid);
+        }
+        return form;
     }
 
     @Override
@@ -44,7 +50,12 @@ public class FormServiceImpl implements FormService {
         {
             logger.info("Finding form for given user");
         }
-        return formRepository.findByuid(uid);
+        Form form = formRepository.findByuid(uid);
+        if(form==null)
+        {
+            throw new FormNotFoundException(uid);
+        }
+        return form;
     }
 
     @Override
@@ -54,7 +65,12 @@ public class FormServiceImpl implements FormService {
         {
             logger.info("Find all forms been created");
         }
-        return formRepository.findAll();
+        List<Form> arr = formRepository.findAll();
+        if(arr.isEmpty())
+        {
+            throw new NoDataFoundException();
+        }
+        return arr;
     }
 
     @Override

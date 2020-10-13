@@ -79,7 +79,7 @@ public class UserServiceImpl implements UserService{
         {
             LOGGER.info("Deleting the user");
         }
-        userRepository.deleteById(id);//.orElseThrow(()-> new UserNotFoundException(id));
+        userRepository.deleteById(id);
     }
 
 

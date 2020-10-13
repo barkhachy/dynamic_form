@@ -29,8 +29,30 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
     {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
-        body.put("message", "Users Not found");
+        body.put("message", "Data Not found");
 
         return new ResponseEntity<>(body , HttpStatus.NOT_FOUND);
+    }
+
+
+    @ExceptionHandler(FormNotFoundException.class)
+    public ResponseEntity<Object> handleFormNotFoundException(FormNotFoundException ex, WebRequest request)
+    {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("message", "Form Not found");
+
+        return new ResponseEntity<>(body , HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(ResponseNotFoundException.class)
+    public ResponseEntity<Object> handleResponseNotFoundException(ResponseNotFoundException ex, WebRequest request)
+    {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("message", "Responses Not found");
+
+        return new ResponseEntity<>(body , HttpStatus.NOT_FOUND);
+
     }
 }

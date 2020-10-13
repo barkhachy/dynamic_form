@@ -1,5 +1,7 @@
 package com.example.demo.services;
 
+import com.example.demo.exceptions.NoDataFoundException;
+import com.example.demo.exceptions.ResponseNotFoundException;
 import com.example.demo.model.Response;
 import com.example.demo.repository.ResponseRepository;
 import org.slf4j.Logger;
@@ -48,6 +50,10 @@ public class ResponseServiceImpl implements ResponseService {
             if(a.getForm_id().equals(formid)) {
                 ans.add(a);
             }
+        }
+        if(ans.isEmpty())
+        {
+            throw new ResponseNotFoundException();
         }
         return ans;
     }
