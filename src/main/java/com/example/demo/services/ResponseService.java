@@ -38,9 +38,6 @@ public class ResponseService {
             if(arr.get(i).getType().toString().equals("MCQ"))
             {
                 ArrayList<String> optns = f.getQstn_list().get(i).getOptions();
-                System.out.println();
-                System.out.println(optns);
-                System.out.println();
                 for(int j=0;j<optns.size();j++)
                 {
                     if(arr.get(i).getAns().equals(optns.get(i)))

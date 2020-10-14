@@ -50,4 +50,11 @@ public class FormController {
         return new ResponseEntity<>(ans, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/get_optns")
+    ResponseEntity<Responsedto> getOptns()
+    {
+        Responsedto ans = new Responsedto(HttpStatus.OK.toString(), "qstns options", formService.getOptns());
+        return new ResponseEntity<>(ans, HttpStatus.OK);
+    }
+
 }

@@ -8,6 +8,7 @@ import com.example.demo.exceptions.NoDataFoundException;
 import com.example.demo.exceptions.UserNotFoundException;
 import com.example.demo.model.Form;
 import com.example.demo.repository.FormRepository;
+import com.example.demo.utils.Qtype;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -109,6 +110,11 @@ public class FormService {
         }
         formRepository.deleteById(id);
         return "";
+    }
+
+    public Qtype[] getOptns()
+    {
+        return Qtype.values();
     }
 
 }
