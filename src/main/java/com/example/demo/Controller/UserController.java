@@ -1,84 +1,80 @@
 package com.example.demo.Controller;
 
 
-import com.example.demo.exceptions.NoDataFoundException;
-import com.example.demo.model.User;
+import com.example.demo.dto.Responsedto;
+import com.example.demo.dto.edit.EditUserDto;
 import com.example.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping(value = "/users")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
     /**
-     * To find all users
-     * @return list of users
+     * To get list of all users
+     * @return
      */
-    @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value = "/findAll", method = RequestMethod.GET)
-    public List<User> findAll()
+    @GetMapping(value = "/all")
+    public ResponseEntity<Responsedto> getAllUsers()
     {
-        List<User> users = userService.findAll();
-        ArrayList<User> users_list = new ArrayList<User>();
-        for(User u: users)
-        {
-            users_list.add(u);
-        }
-        return users;
+        Responsedto ans = new Responsedto(HttpStatus.OK.toString(), "all users", userService.getAllUsers());
+        return new ResponseEntity<>(ans, HttpStatus.OK);
     }
 
     /**
-     * To get details of a particular user based on id
+     * To get detail of a user based on provided id
      * @param id
-     * @return User
+     * @return
      */
-    @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value ="/user/{id}", method = RequestMethod.GET)
-    public User get_user(@PathVariable(value="id") String id)
+    @GetMapping(value ="/{id}")
+    public ResponseEntity<Responsedto> getUser(@PathVariable(value="id") String id)
     {
-        return userService.findByid(id);
+        Responsedto ans = new Responsedto(HttpStatus.OK.toString(),"details of this user"+ id, userService.getDetails(id));
+        return new ResponseEntity<>(ans, HttpStatus.OK);
+    }
+
+    /**
+     * To create a new User
+     * @param user
+     * @return
+     */
+    @PostMapping(value="/add", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Responsedto> createUser(@RequestBody EditUserDto user)
+    {
+        Responsedto ans = new Responsedto(HttpStatus.OK.toString(), "created new User", userService.createUser(user));
+        return new ResponseEntity<>(ans, HttpStatus.OK);
     }
 
     /**
      * To update details of a user
-     * @param id
      * @param user
+     * @param id
      * @return
      */
-    @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value="/user/{id}", method = RequestMethod.PUT)
-    public User update_user(@PathVariable(value="id") String id, @RequestBody User user)
+    @PutMapping(value = "{id}")
+    public ResponseEntity<Responsedto> updateUser(@RequestBody EditUserDto user, @PathVariable(value="id") String id)
     {
-        User ans;
-        if(userService.findByid(id)!=null)
-        {
-            ans = userService.update(user);
-        }
-        else
-        {
-            throw new NoDataFoundException();
-        }
-        return ans;
+        Responsedto ans = new Responsedto(HttpStatus.OK.toString(), "update the user", userService.updateUser(user, id));
+        return new ResponseEntity<>(ans, HttpStatus.OK);
     }
 
     /**
-     * To create a user
-     * @param user
+     * To delete a user on providing their id
+     * @param id
      * @return
      */
-    @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value="/user" , method = RequestMethod.POST)
-    public User add_user(@RequestBody User user)
+    @DeleteMapping(value="{id}")
+    public ResponseEntity<Responsedto> deleteUser(@PathVariable(value = "id") String id)
     {
-        return userService.create(user);
+        Responsedto ans = new Responsedto(HttpStatus.OK.toString(), "deleted the User", userService.delete(id));
+        return new ResponseEntity<>(ans, HttpStatus.OK);
     }
-
 }

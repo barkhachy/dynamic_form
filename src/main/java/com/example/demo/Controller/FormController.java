@@ -1,91 +1,53 @@
 package com.example.demo.Controller;
 
-import com.example.demo.model.Form;
-import com.example.demo.model.Qtype;
+import com.example.demo.dto.Responsedto;
+import com.example.demo.dto.edit.EditFormDto;
 import com.example.demo.services.FormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping
+@RequestMapping(value="/forms")
 public class FormController {
 
     @Autowired
     private FormService formService;
 
-    /**
-     * To get question's type
-     * @return array of QType
-     */
-    @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value="create_form", method = RequestMethod.GET)
-    public Qtype[] gettype()
+    @GetMapping(value="/{id}/all")
+    ResponseEntity<Responsedto> getallforms(@PathVariable(value="id") String id)
     {
-        return Qtype.values();
+        Responsedto ans = new Responsedto(HttpStatus.OK.toString(), "all forms created by me", formService.getallForms(id));
+        return new ResponseEntity<>(ans, HttpStatus.OK);
     }
 
-    /**
-     * To create a form
-     * @param form
-     * @return
-     */
-    @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value="form", method = RequestMethod.POST)
-    public String create(@RequestBody Form form)
+    @PostMapping(value = "/add")
+    ResponseEntity<Responsedto> create(@RequestBody EditFormDto form)
     {
-        Form f = formService.create(form);
-        return "created";
+        Responsedto ans = new Responsedto((HttpStatus.OK.toString()),"form created", formService.createForm(form));
+        return new ResponseEntity<>(ans, HttpStatus.OK);
     }
 
-    /**
-     * Get a form based on provided id
-     * @param form_id
-     * @return
-     */
-    @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value="form/{form_id}", method = RequestMethod.GET)
-    public Form get_form(@PathVariable(value="form_id") String form_id)
+    @GetMapping(value="/{id}")
+    ResponseEntity<Responsedto> getform(@PathVariable(value="id") String id)
     {
-        Form f = formService.findByformid(form_id);
-        return f;
+        Responsedto ans = new Responsedto(HttpStatus.OK.toString(),"",formService.getform(id));
+        return new ResponseEntity<>(ans, HttpStatus.OK);
     }
 
-    /**
-     * Update a form
-     * @param form
-     * @param form_id
-     * @return
-     */
-    @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value="form/{form_id}", method = RequestMethod.PUT)
-    public String update_form(@RequestBody Form form ,@PathVariable(value="form_id") String form_id)
+    @PutMapping(value="/{id}")
+    ResponseEntity<Responsedto> updateform(@PathVariable(value="id") String id, @RequestBody EditFormDto form)
     {
-        Form f = formService.findByformid(form_id);
-        if(f.getUid().equals(""))
-        {
-            Form updated_form= formService.update(form);
-            return "Updated!!";
-        }
-        return "You can't update this form";
+        Responsedto ans = new Responsedto(HttpStatus.OK.toString(),"",formService.getform(id));
+        return new ResponseEntity<>(ans, HttpStatus.OK);
     }
 
-    /**
-     * Delete a form
-     * @param form_id
-     * @return
-     */
-    @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value = "form/{form_id}", method = RequestMethod.DELETE)
-    public String delete_form(@PathVariable(value="form_id") String form_id)
+    @DeleteMapping(value="{id}")
+    ResponseEntity<Responsedto> deleteform(@PathVariable(value="id") String id)
     {
-        Form f = formService.findByformid(form_id);
-        if(f.getUid().equals(""))
-        {
-            formService.delete(form_id);
-            return "Deleted!!";
-        }
-        return "You can't delete this form";
+        Responsedto ans = new Responsedto(HttpStatus.OK.toString(),"",formService.delete(id));
+        return new ResponseEntity<>(ans, HttpStatus.OK);
     }
 
 }

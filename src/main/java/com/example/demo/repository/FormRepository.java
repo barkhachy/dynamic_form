@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface FormRepository extends MongoRepository<Form, String> {
 
+    public List<Form> findAll();
     /**
      * A abstract method to get form on providing the form_id
      * @param formid
