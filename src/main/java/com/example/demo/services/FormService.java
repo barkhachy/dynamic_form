@@ -112,6 +112,11 @@ public class FormService {
         return "";
     }
 
+    /**
+     * To get list of Question type
+     * @return
+     */
+
     public Qtype[] getOptns()
     {
         return Qtype.values();
