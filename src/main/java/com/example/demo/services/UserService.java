@@ -41,7 +41,6 @@ public class UserService {
     public UserDto getDetails(String id) throws UserNotFoundException
     {
         User user = userRepository.findByid(id);
-        System.out.println(user);
         if(user == null)
         {
             throw new UserNotFoundException(id);

@@ -39,11 +39,15 @@ public class FormService {
                 ans.add(tmp);
             }
         }
+        if(ans.isEmpty())
+        {
+                throw new NoDataFoundException();
+        }
         return ans;
     }
 
     /**
-     * Create user
+     * Create form
      * @param form
      * @return
      */
@@ -53,7 +57,7 @@ public class FormService {
     }
 
     /**
-     * To create a form
+     * To get a form with given id
      * @param id
      * @return
      * @throws FormNotFoundException
@@ -82,7 +86,6 @@ public class FormService {
         {
             throw new FormNotFoundException(id);
         }
-
         Form tmp = FormMapper.FormDtoToForm(form);
         if(tmp.getUid()!=null)
         {

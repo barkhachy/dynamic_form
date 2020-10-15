@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import com.example.demo.utils.Qtype;
+
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -16,7 +18,9 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class resp implements Serializable {
 
+    @NotNull
     private Qtype type;
+    @NotNull
     private String ans;
 
 }

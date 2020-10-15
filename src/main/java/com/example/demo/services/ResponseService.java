@@ -3,6 +3,7 @@ package com.example.demo.services;
 import com.example.demo.dto.edit.EditRespDto;
 import com.example.demo.dto.mapper.ResponseMapper;
 import com.example.demo.dto.model.ResponseDto;
+import com.example.demo.exceptions.FormNotFoundException;
 import com.example.demo.exceptions.ResponseNotFoundException;
 import com.example.demo.model.Form;
 import com.example.demo.model.Response;
@@ -32,6 +33,11 @@ public class ResponseService {
     public ResponseDto create(String id, EditRespDto response)
     {
         Form f= formRepository.findByformid(id);
+        if(f==null)
+        {
+            throw new FormNotFoundException(id);
+        }
+        System.out.println(f);
         List<resp> arr = response.getResp_list();
         for(int i=0;i<arr.size();i++)
         {
@@ -52,11 +58,21 @@ public class ResponseService {
         return ResponseMapper.ResponsetoResponseDto(responseRepository.save(ResponseMapper.ResponseDtoToResponse(response)));
     }
 
-    public List<ResponseDto> getall(String formid) throws ResponseNotFoundException
+    /**
+     * To get all response made on form with formid --> id
+     * @param formid
+     * @return
+     * @throws ResponseNotFoundException
+     */
+    public List<ResponseDto> getall(String formid) throws FormNotFoundException,ResponseNotFoundException
     {
         List<Response> tmp = new ArrayList<>(responseRepository.findAll());
         List<ResponseDto> ans = new ArrayList<>();
-
+        Form form = formRepository.findByformid(formid);
+        if(form==null)
+        {
+            throw new FormNotFoundException(formid);
+        }
         for(Response f:tmp)
         {
             ResponseDto resp = ResponseMapper.ResponsetoResponseDto(f);
