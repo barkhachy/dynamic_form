@@ -73,7 +73,11 @@ public class FormController {
     @PutMapping(value="/{id}")
     public ResponseEntity<Responsedto> updateform(@PathVariable(value="id") String id, @RequestBody EditFormDto form) throws FormNotFoundException
     {
+<<<<<<< HEAD
         Responsedto ans = new Responsedto(HttpStatus.OK.toString(), "", formService.update(id,form));
+=======
+        Responsedto ans = new Responsedto(HttpStatus.OK.toString(), "", formService.getform(id));
+>>>>>>> 4035bc97aec59c5839e4a69fe187a6e77b0cce85
         return new ResponseEntity<>(ans, HttpStatus.OK);
     }
 
