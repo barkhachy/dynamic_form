@@ -39,11 +39,15 @@ public class FormService {
                 ans.add(tmp);
             }
         }
+        if(ans.isEmpty())
+        {
+
+        }
         return ans;
     }
 
     /**
-     * Create user
+     * Create form
      * @param form
      * @return
      */
@@ -53,7 +57,7 @@ public class FormService {
     }
 
     /**
-     * To create a form
+     * To get a form with given id
      * @param id
      * @return
      * @throws FormNotFoundException
