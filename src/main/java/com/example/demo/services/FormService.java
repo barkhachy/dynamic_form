@@ -39,13 +39,8 @@ public class FormService {
                 ans.add(tmp);
             }
         }
-        if(ans.isEmpty())
-        {
-<<<<<<< HEAD
-                throw new NoDataFoundException();
-=======
-
->>>>>>> 4035bc97aec59c5839e4a69fe187a6e77b0cce85
+        if(ans.isEmpty()) {
+            throw new NoDataFoundException();
         }
         return ans;
     }
